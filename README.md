@@ -80,8 +80,4 @@ CONTRIBUTING
 You're welcome to contribute! Please open an issue or fork the project 
 and submit a pull request with a clear explanation of your changes.
 
-------------------------------------------------------------
-LICENSE
-------------------------------------------------------------
 
-This project is licensed under the MIT License.
