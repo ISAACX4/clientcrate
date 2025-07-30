@@ -1,0 +1,4 @@
+/* Tailwind is still loaded via CDN, but you can add custom styles here */
+body {
+  font-family: Inter, "Noto Sans", sans-serif;
+}

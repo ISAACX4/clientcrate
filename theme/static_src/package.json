@@ -1,0 +1,13 @@
+{
+  "name": "theme",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "postcss static_src/input.css -o static/css/styles.css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.11",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "autoprefixer": "^10.4.14"
+  }
+}

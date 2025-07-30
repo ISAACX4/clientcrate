@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Order</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-2xl mx-auto bg-white p-8 shadow rounded-xl">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Create Order</h1>
+
+    <form method="POST" class="space-y-6">
+      {% csrf_token %}
+
+      <!-- Customer -->
+      <div>
+        <label for="id_customer" class="block text-sm font-medium text-gray-700 mb-1">Customer</label>
+        {{ form.customer }}
+        <a href="{% url 'create_customer' %}" class="text-sm text-blue-600 underline mt-1 inline-block">+ Add Customer</a>
+      </div>
+
+      <!-- Item Description -->
+      <div>
+        <label for="id_item_description" class="block text-sm font-medium text-gray-700 mb-1">Item Description</label>
+        {{ form.item_description }}
+      </div>
+
+      <!-- Status -->
+      <div>
+        <label for="id_status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+        {{ form.status }}
+      </div>
+
+      <!-- Delivery Date -->
+      <div>
+        <label for="id_delivery_date" class="block text-sm font-medium text-gray-700 mb-1">Delivery Date</label>
+        {{ form.delivery_date }}
+      </div>
+
+      <!-- Is Paid -->
+      <div class="flex items-center gap-3">
+        {{ form.is_paid }}
+        <label for="id_is_paid" class="text-sm text-gray-700">Is Paid?</label>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition"
+      >
+        Create Order
+      </button>
+    </form>
+
+    <p class="text-blue-600 text-sm mt-6 underline">
+      <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+    </p>
+  </div>
+</body>
+</html>

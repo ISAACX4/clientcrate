@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Customer List | ClientCrate</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body class="bg-slate-50" style="font-family: Inter, 'Noto Sans', sans-serif;">
+    <div class="min-h-screen flex flex-col">
+      <!-- Header -->
+      <header class="flex items-center justify-between border-b px-10 py-3 bg-white">
+        <div class="flex items-center gap-8">
+          <div class="flex items-center gap-4 text-[#0e141b]">
+            <svg class="size-4" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+            </svg>
+            <h2 class="text-lg font-bold">ClientCrate</h2>
+          </div>
+          <nav class="flex items-center gap-9 text-sm font-medium">
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'order_list' %}">Orders</a>
+            <a href="#">Products</a>
+            <a href="{% url 'customer_list' %}" class="text-blue-600">Customers</a>
+            <a href="#">Analytics</a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="flex-1 px-40 py-5">
+        <div class="max-w-[960px] mx-auto">
+          <div class="flex justify-between items-center p-4">
+            <h1 class="text-[32px] font-bold text-[#0e141b]">Customers</h1>
+            <a
+              href="{% url 'create_customer' %}"
+              class="bg-[#e7edf3] text-[#0e141b] rounded-xl px-4 py-2 text-sm font-medium"
+              >Add New Customer</a
+            >
+          </div>
+
+          <!-- Customer Table -->
+          <div class="p-4 border border-[#d0dbe7] rounded-xl bg-white overflow-x-auto">
+            <table class="w-full">
+              <thead class="text-left text-sm font-medium text-[#0e141b]">
+                <tr>
+                  <th class="px-4 py-3">Name</th>
+                  <th class="px-4 py-3">Email</th>
+                  <th class="px-4 py-3">Phone Number</th>
+                  <th class="px-4 py-3">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm text-[#4e7397]">
+                {% for customer in customers %}
+                <tr class="border-t border-[#d0dbe7]">
+                  <td class="px-4 py-3 text-[#0e141b]">{{ customer.name }}</td>
+                  <td class="px-4 py-3">{{ customer.email }}</td>
+                  <td class="px-4 py-3">{{ customer.phone }}</td>
+                  <td class="px-4 py-3 flex gap-2">
+                    <a href="{% url 'edit_customer' customer.id %}" class="text-blue-600 hover:underline">Edit</a>
+                    <form method="post" action="{% url 'delete_customer' customer.id %}" onsubmit="return confirm('Are you sure?')">
+                      {% csrf_token %}
+                      <button type="submit" class="text-red-600 hover:underline">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="4" class="text-center px-4 py-6 text-gray-400">No customers found.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

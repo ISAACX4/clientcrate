@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'core/css/register.css' %}">
+
+  <!-- Google Fonts -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700;900"
+  />
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center" style="font-family: Inter, 'Noto Sans', sans-serif;">
+  <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold text-center text-[#0d141c] mb-6">Create an Account</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="mb-4 text-red-600 text-sm text-center">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'register' %}" class="space-y-4">
+      {% csrf_token %}
+      <div>
+        <label class="block mb-1 text-[#0d141c] font-medium">Username</label>
+        <input type="text" name="username" class="w-full border border-[#cedbe8] rounded-lg p-3 bg-slate-50 text-[#0d141c]" placeholder="Enter username" required />
+      </div>
+
+      <div>
+        <label class="block mb-1 text-[#0d141c] font-medium">Email</label>
+        <input type="email" name="email" class="w-full border border-[#cedbe8] rounded-lg p-3 bg-slate-50 text-[#0d141c]" placeholder="Enter email" required />
+      </div>
+
+      <div>
+        <label class="block mb-1 text-[#0d141c] font-medium">Password</label>
+        <input type="password" name="password" class="w-full border border-[#cedbe8] rounded-lg p-3 bg-slate-50 text-[#0d141c]" placeholder="Enter password" required />
+      </div>
+
+      <button type="submit" class="w-full h-12 bg-[#0b79ee] text-white font-semibold rounded-full">Register</button>
+    </form>
+
+    <p class="text-center text-sm text-[#49719c] mt-4">
+      Already have an account?
+      <a href="{% url 'login' %}" class="underline text-[#0b79ee] font-medium">Login</a>
+    </p>
+  </div>
+</body>
+</html>

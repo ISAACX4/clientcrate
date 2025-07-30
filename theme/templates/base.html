@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClientCrate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind Compiled CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
+
+    <!-- Navbar -->
+    <header class="bg-white shadow-md px-6 py-4">
+        <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <h1 class="text-2xl font-bold text-indigo-600">ClientCrate</h1>
+            <nav>
+                <ul class="flex space-x-6 text-sm font-medium">
+                    <li><a href="{% url 'dashboard' %}" class="text-gray-700 hover:text-indigo-500">Dashboard</a></li>
+                    <li><a href="{% url 'create_customer' %}" class="text-gray-700 hover:text-indigo-500">Add Customer</a></li>
+                    <li><a href="{% url 'create_order' %}" class="text-gray-700 hover:text-indigo-500">Create Order</a></li>
+                    <li><a href="{% url 'logout' %}" class="text-red-500 hover:text-red-700">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="p-6 max-w-7xl mx-auto">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>
