@@ -1,0 +1,14 @@
+<div class="mt-6 bg-white border border-gray-200 rounded-xl shadow-sm p-5">
+  <div class="flex items-center justify-between mb-3">
+    <h2 class="text-lg font-semibold text-gray-800">
+      💡 AI Suggestion
+    </h2>
+  </div>
+  {% if ai_response %}
+    <p class="text-gray-600 whitespace-pre-line">
+      {{ ai_response }}
+    </p>
+  {% else %}
+    <p class="text-gray-400 italic">No suggestions available yet.</p>
+  {% endif %}
+</div>

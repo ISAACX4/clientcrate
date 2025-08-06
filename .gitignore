@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+
+# Environment
+.env
+venv/
+*.env
+
+# Static & Build files
+staticfiles/
+node_modules/
+
+# VS Code
+.vscode/
+
+# Secret config
+bizmanager/settings.py

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClientCrate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Replace this -->
+<!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+
+<!-- With this -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
+
+    <!-- Navbar -->
+    <header class="bg-white shadow px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-600">ClientCrate</h1>
+            <nav>
+                <ul class="flex space-x-6 text-sm font-medium">
+                    <li><a href="{% url 'dashboard' %}" class="text-gray-700 hover:text-indigo-500">Dashboard</a></li>
+                    <li><a href="{% url 'create_customer' %}" class="text-gray-700 hover:text-indigo-500">Add Customer</a></li>
+                    <li><a href="{% url 'create_order' %}" class="text-gray-700 hover:text-indigo-500">Create Order</a></li>
+                    <li><a href="{% url 'logout' %}" class="text-red-500 hover:text-red-700">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="max-w-7xl mx-auto p-6">
+        {% if messages %}
+            <div class="mb-4 space-y-2">
+                {% for message in messages %}
+                    <div class="p-3 rounded text-white {% if message.tags == 'error' %}bg-red-500{% elif message.tags == 'success' %}bg-green-500{% else %}bg-gray-700{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-10 text-center text-sm text-gray-500 py-4 border-t">
+        &copy; {{ year|default:2025 }} ClientCrate. All rights reserved.
+    </footer>
+
+</body>
+</html>

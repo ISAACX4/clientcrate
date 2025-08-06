@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-xl mx-auto py-10">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">
+    {% if form.instance.pk %}Edit{% else %}Add{% endif %} Product
+  </h1>
+
+  <form method="post" class="space-y-6">
+    {% csrf_token %}
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Name</label>
+      {{ form.name }}
+      {% if form.name.errors %}
+        <p class="text-red-500 text-sm">{{ form.name.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-2">Price</label>
+      {{ form.price }}
+      {% if form.price.errors %}
+        <p class="text-red-500 text-sm">{{ form.price.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-xl">
+      {% if form.instance.pk %}Update{% else %}Create{% endif %} Product
+    </button>
+    <a href="{% url 'product_list' %}" class="ml-4 text-gray-600 hover:underline">Cancel</a>
+  </form>
+</div>
+{% endblock %}

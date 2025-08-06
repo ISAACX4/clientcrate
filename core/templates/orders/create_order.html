@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add New Order</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex min-h-screen flex-col bg-slate-50 overflow-x-hidden font-sans">
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between border-b px-10 py-3">
+          <div class="flex items-center gap-4 text-[#0e141b]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-lg font-bold">ClientCrate</h2>
+          </div>
+          <div class="flex items-center gap-9">
+            <a class="text-sm font-medium" href="#">Dashboard</a>
+            <a class="text-sm font-medium" href="#">Customers</a>
+            <a class="text-sm font-medium" href="#">Orders</a>
+            <a class="text-sm font-medium" href="#">Products</a>
+          </div>
+        </header>
+
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="w-full max-w-[512px] flex flex-col">
+            <div class="flex justify-between p-4">
+              <p class="text-[32px] font-bold">Add New Order</p>
+            </div>
+
+            <form method="POST" class="space-y-6">
+              {% csrf_token %}
+
+              <div class="px-4">
+                <label class="block text-base font-medium pb-2">Customer</label>
+                {{ form.customer }}
+              </div>
+
+              <div class="px-4">
+                <label class="block text-base font-medium pb-2">Product</label>
+                {{ form.product }}
+              </div>
+
+              <div class="px-4">
+                <label class="block text-base font-medium pb-2">Status</label>
+                {{ form.status }}
+              </div>
+
+              <div class="px-4">
+                <label class="block text-base font-medium pb-2">Delivery Date</label>
+                {{ form.delivery_date }}
+              </div>
+
+              <div class="px-4">
+                <label class="block text-base font-medium pb-2">Item Description</label>
+                {{ form.item_description }}
+              </div>
+
+              <div class="px-4 flex items-center justify-between">
+                <label class="text-base font-normal">Is Paid</label>
+                {{ form.is_paid }}
+              </div>
+
+              <div class="flex justify-end px-4">
+                <button
+                  type="submit"
+                  class="flex items-center justify-center rounded-xl h-10 px-4 bg-[#1980e6] text-white text-sm font-bold"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

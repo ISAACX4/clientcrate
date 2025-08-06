@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard | ClientCrate</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body class="bg-slate-50" style="font-family: Inter, 'Noto Sans', sans-serif;">
+    <!-- Header -->
+    <header class="flex items-center justify-between border-b px-10 py-3 bg-white shadow-sm">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-4 text-[#0e141b]">
+          <svg class="size-4" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor" />
+          </svg>
+          <h2 class="text-lg font-bold">ClientCrate</h2>
+        </div>
+        <nav class="flex items-center gap-9 text-sm font-medium">
+          <a href="{% url 'dashboard' %}" class="text-blue-600">Dashboard</a>
+          <a href="{% url 'order_list' %}">Orders</a>
+          <a href="{% url 'product_list' %}">Products</a>
+          <a href="{% url 'customer_list' %}">Customers</a>
+          <a href="#">Analytics</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="px-10 py-6">
+      <div class="max-w-7xl mx-auto space-y-8">
+
+        <!-- Welcome -->
+        <div>
+          <h1 class="text-3xl font-bold text-[#0e141b]">Welcome, {{ user.username }} 👋</h1>
+          <p class="text-[#4e7397] text-sm mt-1">Here’s your business summary at a glance.</p>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-sm font-medium text-[#4e7397]">Customers</h2>
+            <p class="text-2xl font-bold text-[#0e141b] mt-2">{{ customers_count }}</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-sm font-medium text-[#4e7397]">Total Orders</h2>
+            <p class="text-2xl font-bold text-[#0e141b] mt-2">{{ orders_count }}</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-sm font-medium text-[#4e7397]">Delivered</h2>
+            <p class="text-2xl font-bold text-[#0e141b] mt-2">{{ delivered_orders }}</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <h2 class="text-sm font-medium text-[#4e7397]">Pending</h2>
+            <p class="text-2xl font-bold text-[#0e141b] mt-2">{{ pending_orders }}</p>
+          </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <h2 class="text-xl font-bold text-[#0e141b] mb-4">Recent Orders</h2>
+          {% if recent_orders %}
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm text-left text-[#4e7397]">
+              <thead class="text-xs uppercase bg-[#e7edf3] text-[#0e141b]">
+                <tr>
+                  <th scope="col" class="px-4 py-3">Customer</th>
+                  <th scope="col" class="px-4 py-3">Product</th>
+                  <th scope="col" class="px-4 py-3">Status</th>
+                  <th scope="col" class="px-4 py-3">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in recent_orders %}
+                <tr class="border-b">
+                  <td class="px-4 py-2">{{ order.customer.name }}</td>
+                  <td class="px-4 py-2">{{ order.product }}</td>
+                  <td class="px-4 py-2 capitalize">{{ order.status }}</td>
+                  <td class="px-4 py-2">{{ order.created_at|date:"M d, Y" }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <p class="text-gray-500">No recent orders to show.</p>
+          {% endif %}
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
